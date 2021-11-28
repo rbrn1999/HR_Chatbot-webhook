@@ -24,6 +24,8 @@ def create_richMenu(lineId, linebotapi, timeflag=True, memberId=""):
                     area["action"]["uri"] = WebUrl + area["action"]["uri"]
                 else:
                     area["action"]["uri"] = WebUrl + area["action"]["uri"] + memberId
+        elif area["action"]["type"] == "postback":
+            area["action"]["data"] = WebUrl + area["action"]["data"] + memberId + '/'
 
     createResponse = requests.post(
         'https://api.line.me/v2/bot/richmenu',

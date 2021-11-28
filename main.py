@@ -3,11 +3,11 @@ import richMenu_handler
 import requests, json
 from linebot import WebhookHandler, LineBotApi
 from linebot.exceptions import InvalidSignatureError
-from linebot.models import FollowEvent, TextSendMessage, MessageEvent, TextMessage
+from linebot.models import FollowEvent, TextSendMessage, MessageEvent, TextMessage, PostbackEvent, TemplateSendMessage, URITemplateAction, CarouselTemplate, CarouselColumn
 from config import channelSecret, channelAccessToken, WebUrl
 
 # （0） Messages
-welcomeMessage = TextSendMessage(text='歡迎加入本公司！')
+welcomeMessage = TextSendMessage(text='歡迎加入本公司！!')
 registerHandleMessage = TextSendMessage(text='正在為你註冊打卡系統')
 registerSuccessText = '已完成註冊打卡系統\n'
 
@@ -67,7 +67,38 @@ def handle_queryResult(queryResult, lineId):
             message = TextSendMessage(text=queryResult['fulfillmentMessages'][n]['text']['text'][0])
             lineBotApi.push_message(lineId, message)
 
-
+# (4) Postback Event
+@handler.add(PostbackEvent)
+def handle_postback(event):
+    if '/clock/' in event.postback.data:
+        url = event.postback.data
+        # url = f"{WebUrl}/clock/" # temporary fake url
+        templateMessage = TemplateSendMessage(
+            alt_text='請選擇功能 ',
+            template=CarouselTemplate(
+                columns=[
+                    CarouselColumn(
+                        thumbnail_image_url='https://www.datamaticsinc.com/wp-content/uploads/2016/09/buddy-punching.jpg',
+                        title='打卡系統',
+                        text='請點選下列功能',
+                        actions=[
+                            URITemplateAction(
+                                label='上班',
+                                uri= url + 'on'
+                            ),
+                            URITemplateAction(
+                                label='下班',
+                                uri= url + 'off'
+                            ),
+                        ]
+                    )
+                ]
+            )
+        )
+        replyMessages = [templateMessage]
+        lineBotApi.reply_message(event.reply_token, replyMessages)
+    else:
+        lineBotApi.reply_message(event.reply_token, {type: 'text', text: 'template 載入失敗'})
 def postMemberFlow(lineId, name):
     # firestore 註冊
     response = requests.post(WebUrl + '/memberRegister', json={'name' : name, 'lineId' : lineId})

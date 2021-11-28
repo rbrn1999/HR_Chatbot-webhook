@@ -15,10 +15,8 @@
         "height": 405
       },
       "action": {
-        "type": "uri",
-        "uri" : "/newFootprint/",
-        "data": "?openExternalBrowser=1"
-        
+        "type": "postback",
+        "data": "/clock/"
       }
     },
     {
