@@ -18,14 +18,14 @@ def create_richMenu(lineId, linebotapi, timeflag=True, memberId=""):
     for area in menuJsonObject["areas"]:
         if area["action"]["type"] == "uri":
             if "data" in area["action"].keys() :
-                area["action"]["uri"] = WebUrl + area["action"]["uri"] + memberId + area["action"]["data"]
+                area["action"]["uri"] = WebUrl + area["action"]["uri"] # + memberId + area["action"]["data"]
             else :
                 if area["action"]["uri"] == "/myCompany":
                     area["action"]["uri"] = WebUrl + area["action"]["uri"]
                 else:
-                    area["action"]["uri"] = WebUrl + area["action"]["uri"] + memberId
-        elif area["action"]["type"] == "postback":
-            area["action"]["data"] = WebUrl + area["action"]["data"] + memberId + '/'
+                    area["action"]["uri"] = WebUrl + area["action"]["uri"] # + memberId
+        # elif area["action"]["type"] == "postback":
+        #     area["action"]["data"] = WebUrl + area["action"]["data"] + memberId + '/'
 
     createResponse = requests.post(
         'https://api.line.me/v2/bot/richmenu',

@@ -16,7 +16,7 @@
       },
       "action": {
         "type": "postback",
-        "data": "/clock/"
+        "data": "/clock"
       }
     },
     {
@@ -28,7 +28,7 @@
       },
       "action": {
         "type": "uri",
-        "uri" : "/myFootprints/"
+        "uri" : "/leave_permission"
       }
     },
     {
@@ -40,7 +40,7 @@
       },
       "action": {
         "type": "uri",
-        "uri": "/myData/"
+        "uri": "/attendance"
       }
     },
     {
@@ -52,7 +52,7 @@
       },
       "action": {
         "type": "uri",
-        "uri": "/myCompany"
+        "uri": "/personal_information"
       }
     },
     {
@@ -64,7 +64,7 @@
       },
       "action": {
         "type": "uri",
-        "uri" : "/checkFootprints/"
+        "uri" : "/company_information"
       }
     },
     {
@@ -76,7 +76,7 @@
       },
       "action": {        
         "type": "uri",
-        "uri" : "/report/"
+        "uri" : "/report"
       }
     }
  ]
