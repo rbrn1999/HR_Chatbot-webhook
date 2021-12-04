@@ -70,9 +70,7 @@ def handle_queryResult(queryResult, lineId):
 # (4) Postback Event
 @handler.add(PostbackEvent)
 def handle_postback(event):
-    if 'clock' in event.postback.data:
-        url = event.postback.data
-        # url = f"{WebUrl}/clock/" # temporary fake url
+    if '/work/' in event.postback.data:
         templateMessage = TemplateSendMessage(
             alt_text='請選擇功能 ',
             template=CarouselTemplate(
@@ -84,11 +82,11 @@ def handle_postback(event):
                         actions=[
                             URITemplateAction(
                                 label='上班',
-                                uri= WebUrl + '/start_work'
+                                uri= event.postback.data.replace('/work/', '/start_work/')
                             ),
                             URITemplateAction(
                                 label='下班',
-                                uri= WebUrl + '/end_work'
+                                uri= event.postback.data.replace('/work/', '/end_work/')
                             ),
                         ]
                     )
@@ -101,7 +99,7 @@ def handle_postback(event):
         lineBotApi.reply_message(event.reply_token, {type: 'text', text: 'template 載入失敗'})
 def postMemberFlow(lineId, name):
     # firestore 註冊
-    response = requests.post(WebUrl + '/register', json={'name' : name, 'lineId' : lineId})
+    response = requests.post(WebUrl + '/register/', json={'name' : name, 'lineId' : lineId})
     member = response.content
     memberToDict = json.loads(member)
     return memberToDict

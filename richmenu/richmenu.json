@@ -16,7 +16,7 @@
       },
       "action": {
         "type": "postback",
-        "data": "/clock"
+        "data": "/work/"
       }
     },
     {
@@ -28,7 +28,7 @@
       },
       "action": {
         "type": "uri",
-        "uri" : "/leave_permission"
+        "uri" : "/leave_permission/"
       }
     },
     {
@@ -40,7 +40,7 @@
       },
       "action": {
         "type": "uri",
-        "uri": "/attendance"
+        "uri": "/attendance/"
       }
     },
     {
@@ -52,7 +52,7 @@
       },
       "action": {
         "type": "uri",
-        "uri": "/personal_information"
+        "uri": "/personal_information/"
       }
     },
     {
@@ -64,7 +64,7 @@
       },
       "action": {
         "type": "uri",
-        "uri" : "/company_information"
+        "uri" : "/company_information/"
       }
     },
     {
@@ -76,7 +76,7 @@
       },
       "action": {        
         "type": "uri",
-        "uri" : "/report"
+        "uri" : "/report/"
       }
     }
  ]
